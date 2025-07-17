@@ -17,10 +17,7 @@ public class lc150 {
     push 方法是 Deque 接口的一部分，用于将一个元素插入到双端队列的头部。
     它模拟了栈的行为，将元素压入栈顶。
      */
-    public static void main(String[] args) {
-        System.out.println(evalRPN(new String[]{"4","13","5","/","+"}));
-    }
-    public static int evalRPN(String[] tokens) {
+    public int evalRPN(String[] tokens) {
         Deque<Integer> deque = new ArrayDeque<>();
         for (String s : tokens) {
             switch (s) {
