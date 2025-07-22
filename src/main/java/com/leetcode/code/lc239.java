@@ -6,13 +6,8 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 public class lc239 {
-    public static void main(String[] args) {
-        int[] res = maxSlidingWindow(new int[]{2,5,3,4,1},3);
-        System.out.println(Arrays.toString(res));
-    }
-
     //时间复杂度O(N)
-    public static int[] maxSlidingWindow(int[] nums, int k) {
+    public int[] maxSlidingWindow(int[] nums, int k) {
         //使用双向队列
         Deque<Integer> deque = new LinkedList<>();
         if (k==1) return nums;
