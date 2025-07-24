@@ -1,7 +1,5 @@
 package com.leetcode.util;
 
-import com.leetcode.code.lc707;
-
 /**
  * 链表节点类
  */
