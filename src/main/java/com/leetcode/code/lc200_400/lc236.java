@@ -2,9 +2,8 @@ package com.leetcode.code.lc200_400;
 
 import com.leetcode.util.TreeNode;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
+
 import java.util.Queue;
 
 /*
