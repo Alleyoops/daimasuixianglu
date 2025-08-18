@@ -5,7 +5,7 @@ import com.leetcode.util.ListNode;
 /*
  给你一个链表的头节点 head 和一个整数 val ，请你删除链表中所有满足 Node.val == val 的节点，并返回 新的头节点 。
  */
-class lc203 {
+public class lc203 {
     //方法一：直接使用原来的链表来进行头结点的删除操作。
     public ListNode removeElements1(ListNode head, int val) {
         //删除头结点
