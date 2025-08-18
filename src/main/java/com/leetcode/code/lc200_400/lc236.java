@@ -23,12 +23,14 @@ public class lc236 {
         if (root==null) return;
         //左
         postOrder(root.left,p,q);
-        //检查递归左子树后flag是否已经设置
+        //在递归左子树后，立即检查 flag 是否为 true，如果为 true，直接返回，不再递归右子树。
         if (flag) return;
+
         //右
         postOrder(root.right,p,q);
-        //检查递归右子树后flag是否已经设置
+        //在递归右子树后，再次检查 flag 是否为 true，如果为 true，直接返回，不处理当前节点。
         if (flag) return;
+
         //中
         flag = isCommonAncestor(root,p,q);
         if (flag) {
