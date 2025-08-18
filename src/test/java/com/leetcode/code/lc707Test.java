@@ -1,8 +1,8 @@
 package com.leetcode.code;
 
+import com.leetcode.code.lc600above.lc707;
 import com.leetcode.util.ListNode;
 import org.junit.*;
-import static org.junit.Assert.*;
 
 /**
  * lc707 单元测试类

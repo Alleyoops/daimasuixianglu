@@ -2,11 +2,9 @@ package com.leetcode.code;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.leetcode.code.lc383;
+import com.leetcode.code.lc200_400.lc383;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.List;
-import java.util.Iterator;
 
 public class lc383Test {
     private lc383 solution;

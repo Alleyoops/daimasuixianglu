@@ -1,5 +1,6 @@
 package com.leetcode.code;
 
+import com.leetcode.code.lc200_400.lc202;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

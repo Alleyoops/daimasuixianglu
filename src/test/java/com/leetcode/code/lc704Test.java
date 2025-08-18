@@ -1,5 +1,6 @@
 package com.leetcode.code;
 
+import com.leetcode.code.lc600above.lc704;
 import org.junit.Before;
 import org.junit.Test;
 

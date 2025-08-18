@@ -1,6 +1,6 @@
 package com.leetcode.code;
 
-import com.leetcode.code.lc242;
+import com.leetcode.code.lc200_400.lc242;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

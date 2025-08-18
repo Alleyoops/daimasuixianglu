@@ -1,6 +1,6 @@
 package com.leetcode.code;
 
-import com.leetcode.code.lc349;
+import com.leetcode.code.lc200_400.lc349;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

@@ -1,7 +1,7 @@
 package com.leetcode.code;
 
 import com.leetcode.util.ListNode;
-import com.leetcode.code.lc206;
+import com.leetcode.code.lc200_400.lc206;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

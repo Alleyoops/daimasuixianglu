@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.leetcode.code.lc459;
+import com.leetcode.code.lc400_600.lc459;
 
 /**
  * lc459Test class tests the repeatedSubstringPattern method of lc459 class.
