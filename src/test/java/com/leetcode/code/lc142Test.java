@@ -1,6 +1,6 @@
 package com.leetcode.code;
 
-import com.leetcode.code.lc1_200.lc142;
+import com.leetcode.code.lc100_200.lc142;
 import com.leetcode.util.ListNode;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
