@@ -7,39 +7,39 @@ import java.util.List;
  */
 public class lc93 {
     List<String> result = new ArrayList<>();
-    StringBuilder sb_path = new StringBuilder();
     public List<String> restoreIpAddresses(String s) {
-        backTrack(s,0,new StringBuilder());
+        if (s.length()<4) return result;
+        //向s中插入分割点，判断每次分割后的当前字段是否合法
+        StringBuilder sb = new StringBuilder(s);
+        backTrack(0,sb,0);
         return result;
     }
-    private void backTrack(String s,int startIndex,StringBuilder sb){
+    private void backTrack(int startIndex,StringBuilder sb,int dotCount){
         //终止条件
-        if (startIndex==s.length()&&sb_path.length()==s.length()+4){
-            System.out.println("test");
-            sb_path.deleteCharAt(sb_path.length()-1);
-            result.add(sb_path.toString());
+        if (dotCount==3){
+            //判断最后一段是否合法
+            if (isValid(sb,startIndex,sb.length()-1)) result.add(sb.toString());
             return;
         }
-        //处理逻辑
-        for (int i = startIndex; i < s.length(); i++) {
-            String sub = sb.append(s.charAt(i)).toString();
-            if (sub.length()==4) break;
-            int num = Integer.parseInt(sub);
-            //符合要求的情况一：单独0
-            if (num==0){
-                sb_path.append(sub);
-                sb_path.append(".");
-                backTrack(s,i+1,new StringBuilder());
-                sb_path.deleteCharAt(sb_path.length()-1);
-                break;
-            }
-            //情况二：1~255
-            if (1<=num&&num<=255){
-                sb_path.append(sub);
-                sb_path.append(".");
-                backTrack(s,i+1,new StringBuilder());
-                sb_path.deleteCharAt(sb_path.length()-1);
-            }
+        //当前字段处理逻辑
+        for (int i = startIndex; i < sb.length(); i++) {
+            if (isValid(sb,startIndex,i)){
+                sb.insert(i+1,'.');
+                backTrack(i+2,sb,dotCount+1);
+                sb.deleteCharAt(i+1);
+            }else break;
         }
+    }
+    //编写合法函数
+    private boolean isValid(StringBuilder sb, int start ,int end){
+        if (start>end) return false;
+        if (sb.charAt(start)=='0'&&start!=end) return false;
+        int num = 0;
+        for (int i = start;i<=end;i++){
+            int digit = sb.charAt(i)-'0';
+            num = num*10+digit;
+            if (num>255) return false;
+        }
+        return true;
     }
 }
