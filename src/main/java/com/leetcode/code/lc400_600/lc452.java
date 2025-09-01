@@ -1,11 +1,10 @@
 package com.leetcode.code.lc400_600;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 public class lc452 {
     public static void main(String[] args) {
-        System.out.println(findMinArrowShots(new int[][]{{-2147483646, -2147483645}, {2147483646, 2147483647}}));
+        System.out.println(findMinArrowShots(new int[][]{{1,2}, {3,4},{5,6},{7,8}}));
 
     }
     public static int findMinArrowShots(int[][] points) {
@@ -18,20 +17,18 @@ public class lc452 {
                 return Integer.compare(o1[0], o2[0]);
             }
         });
-        //打印数组
-        for (int i = 0; i < points.length; i++) {
-            System.out.println(Arrays.toString(points[i]));
-        }
         int time = 0;
-//        for (int i = 0; i < points.length; i++) {
-//            for (int j = points.length-1; j >= i; j--) {
-//                if (points[j][0]<=points[i][1]){
-//                    time++;
-//                    i=j;
-//                    break;
-//                }
-//            }
-//        }
+        boolean[] flags = new boolean[points.length];//标记数组，默认false
+        for (int i = points.length-1; i >= 0; i--) {
+            if (!flags[i]){
+                for (int j = i-1; j >= 0; j--) {
+                    if (points[i][0]<=points[j][1]&& !flags[j]){
+                        flags[j] = true;
+                    }
+                }
+                time++;
+            }
+        }
         return time;
     }
 }
