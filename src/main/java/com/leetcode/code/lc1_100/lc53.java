@@ -47,4 +47,21 @@ public class lc53 {
         }
         return res;
     }
+    public int maxSubArray4(int[] nums){
+        if (nums.length==1) return nums[0];
+        //dp[i]表示 以nums[i]结尾的连续子数组 的最大和
+        int[] dp = new int[nums.length+1];
+        dp[0] = nums[0];
+        int result = dp[0];
+        for (int i = 1; i < nums.length+1; i++) {
+            if (dp[i-1]>=0) {
+                dp[i] = dp[i-1]+nums[i];
+            }
+            else if (dp[i-1]<0){
+                dp[i] = nums[i];
+            }
+            result = Math.max(result,dp[i]);
+        }
+        return result;
+    }
 }
