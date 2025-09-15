@@ -20,18 +20,16 @@ public class lc392 {
         //最长公共子序列问题
         int[][] dp = new int[s.length()+1][t.length()+1];
         //dp[i][j]表示i-1和j-1之前的s和t的公共子序列的最长值
-        //初始化
-        dp[0][0] = 0;
         for (int i = 1; i < s.length()+1; i++) {
             for (int j = 1; j < t.length()+1; j++) {
-                if (s.charAt(i)==t.charAt(j)){
+                if (s.charAt(i-1)==t.charAt(j-1)){
                     dp[i][j] = dp[i-1][j-1]+1;
                 }else {
-                    dp[i][j] = Math.max(dp[i-1][j],dp[i][j-1]);
+                    dp[i][j] = dp[i][j-1];
                 }
             }
         }
-        return dp[s.length()-1][t.length()-1]==s.length();
+        return dp[s.length()][t.length()]==s.length();
     }
     public boolean isSubsequence3(String s, String t) {
         //双指针法
