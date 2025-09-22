@@ -1,8 +1,6 @@
 package com.leetcode.code.lc1_100;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Deque;
+import java.util.*;
 
 public class lc84 {
     public int largestRectangleArea(int[] heights) {
