@@ -1,4 +1,4 @@
-package com.leetcode.code.lc1_100;
+package com.leetcode.code.kc;
 
 import java.util.Scanner;
 
