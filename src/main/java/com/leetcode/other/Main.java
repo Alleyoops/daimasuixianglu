@@ -1,106 +1,90 @@
 package com.leetcode.other;
 
+import java.util.Scanner;
 
-import java.util.*;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-
-public class Main extends Pattern implements IPrint {
+public class Main {
     public static void main(String[] args) {
-//        test(1,2);
-//        Main m = new Main("iii");
-//        Main.test();
-//        m.print(1, 2);
-//        m.print();
-//        System.out.println(m.hashCode());
-//        String s1 = "abc";
-//        String s2 = new String("abc");
-//        String s3 = s2.intern();
-//        System.out.println(s1 == s2);
-//        System.out.println(s1 == s3);
-//        divide(1, 0);
-//        System.out.println(add(1));
-//        List<Integer> list1 = new ArrayList<>();
-//        for (int i = 0; i < 9; i++) {
-//            list1.add(i);
-//        }
-//        List<Integer> list2 = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//            list2.add(i);
-//        }
-        //计时器
-//        long start = System.nanoTime();
-//        list1.add(10);
-//        long end = System.nanoTime();
-//        System.out.println(end - start);
-//        long start2 = System.nanoTime();
-//        list2.add(11);
-//        long end2 = System.nanoTime();
-//        System.out.println(end2 - start2);
-//        long start3 = System.nanoTime();
-//        list2.add(12);
-//        long end3 = System.nanoTime();
-//        System.out.println(end3 - start3);
-//        HashMap<Integer, Integer> map = new HashMap<>();
-//        map.put(1, 2);
-//        map.put(2, 2);
-//        map.put(3, 3);
-//        System.out.println(map.hashCode());
-//        HashMap<Integer, Integer> map2 = new HashMap<>();
-//        map2.put(1, 2);
-//        map2.put(2, 2);
-//        map2.put(3, 3);
-//        System.out.println(map2.hashCode());
-//        System.out.println(map.equals(map2));
-//        System.out.println(map==map2);
-//        map.put(null, null);
-//        System.out.println(map.get(null));
-        new myThread(()-> System.out.println("新线程哦~")).start();
-        ArrayList<Integer> list = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        String equation = scanner.nextLine();
+        scanner.close();
+
+        // 分割方程为左右两边
+        String[] parts = equation.split("=");
+        String left = parts[0];
+        String right = parts[1];
+
+        // 解析左右两边，获取系数和常数
+        Expression leftExp = parseExpression(left);
+        Expression rightExp = parseExpression(right);
+
+        // 移项: 左边未知数系数 - 右边未知数系数
+        double coefficient = leftExp.coefficient - rightExp.coefficient;
+        // 移项: 右边常数 - 左边常数
+        double constant = rightExp.constant - leftExp.constant;
+
+        // 计算解
+        double solution = constant / coefficient;
+        // 处理-0.000的情况
+        if (Math.abs(solution) < 1e-9) {
+            solution = 0;
+        }
+
+        // 输出结果，保留三位小数
+        System.out.printf("%c=%.3f\n", leftExp.variable, solution);
     }
 
-    private static void test() {
+    // 表示表达式的系数和常数
+    static class Expression {
+        char variable;
+        double coefficient;
+        double constant;
     }
 
-    @Override
-    public void print(int a, int b) {
-        System.out.println(a + b + "newAns");
-    }
+    // 解析表达式，返回系数和常数
+    private static Expression parseExpression(String expr) {
+        Expression exp = new Expression();
+        exp.coefficient = 0;
+        exp.constant = 0;
 
-    @Override
-    public void print() {
-        System.out.println("抽象");
-        super.print(666);
-    }
+        // 查找变量
+        for (char c : expr.toCharArray()) {
+            if (Character.isLowerCase(c)) {
+                exp.variable = c;
+                break;
+            }
+        }
 
-    Main(String string) {
-        System.out.println(string);
-    }
+        // 在表达式开头添加+号，方便统一处理
+        expr = "+" + expr;
+        // 使用正则表达式分割成项
+        String[] terms = expr.split("(?=[+-])");
 
-    //    public static void divide(int a, int b) {
-//        if (b == 0) {
-//            try {
-//                throw new Exception("除数不能为零！"); // 抛出异常
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//                e.getMessage();
-//            }
-//        }
-//        System.out.println("end");
-//    }
-    public static <T> String add(T a) {
-        return a.toString();
-    }
+        for (String term : terms) {
+            if (term.isEmpty()) continue;
 
-}
-class myThread extends Thread{
-    public myThread(Runnable task) {
-        super(task);
-    }
+            // 处理每一项
+            if (term.contains(String.valueOf(exp.variable))) {
+                // 处理未知数项
+                String coeffStr = term.replace(String.valueOf(exp.variable), "");
+                double coeff;
 
-    @Override
-    public void run() {
-        System.out.println(Thread.currentThread().getName());
-        System.out.println(this.getName());
+                if (coeffStr.isEmpty() || coeffStr.equals("+")) {
+                    coeff = 1;
+                } else if (coeffStr.equals("-")) {
+                    coeff = -1;
+                } else {
+                    coeff = Double.parseDouble(coeffStr);
+                }
+
+                exp.coefficient += coeff;
+            } else {
+                // 处理常数项
+                if (!term.equals("+") && !term.equals("-")) {
+                    exp.constant += Double.parseDouble(term);
+                }
+            }
+        }
+
+        return exp;
     }
 }
