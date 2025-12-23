@@ -23,17 +23,13 @@ public class lc76 {
                 left++;
             }
         }
-        String ansStr = s.substring(ansLeft+1,ansRight-ansLeft);
-        return ansStr;
+        return s.substring(ansLeft+1,ansRight);
     }
     public boolean check(String s,String t, HashMap<Character,Integer> tMap,int left,int right){
         if(right-left<t.length()) return false;
         for(int i = left+1;i<=right;i++){
-            if(tMap.containsKey(s.charAt(i))){
-                tMap.remove(s.charAt(i));
-            }
+            tMap.remove(s.charAt(i));
         }
-        if(tMap.size()==0) return true;
-        else return false;
+        return tMap.isEmpty();
     }
 }
